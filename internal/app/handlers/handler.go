@@ -5,7 +5,7 @@ import (
 	"github.com/ANkulagin/urlshortener_service/internal/app/storage"
 	"github.com/go-chi/chi"
 	"github.com/sirupsen/logrus"
-	"io/ioutil"
+	"io"
 	"net/http"
 )
 
@@ -21,7 +21,7 @@ func ShortenURL(w http.ResponseWriter, r *http.Request) {
 	log.Info("Processing ShortenURL request")
 
 	// Получение данных из тела POST-запроса
-	body, err := ioutil.ReadAll(r.Body)
+	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		log.Error("Error reading request body:", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
